@@ -174,8 +174,8 @@ export default function Market() {
               </tbody>
             </table>
           </div>
-        </Card>
-      )}
+        </CardContent>
+      </Card>
 
       {/* No Data State */}
       {(!markets || markets.length === 0) && !isLoading && (
