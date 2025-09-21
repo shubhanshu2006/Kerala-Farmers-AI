@@ -72,9 +72,44 @@ export const ChatBot = () => {
       reply = "Rice thrives in warm, wet conditions 🌾💧. It needs plenty of water during its growing season. Any particular aspect you're curious about?";
     } else if (userMessage.toLowerCase().includes("maize")) {
       reply = "Maize, or corn, is a versatile crop 🌽. It prefers well-drained soil and full sun. Do you want tips on cultivation or pest management?";
+    } else if (userMessage.toLowerCase().includes("technique")) {
+      reply = "There are various farming techniques like crop rotation, no-till farming, and organic farming 🌱. Which one would you like to know more about?";
+    } 
+      else if (userMessage.toLowerCase().includes("organic")) {
+      reply = "Organic farming avoids synthetic chemicals and focuses on natural processes 🌿. It improves soil health and biodiversity. Interested in starting organic farming?";
+    } 
+      else if (userMessage.toLowerCase().includes("crop rotation")) {
+      reply = "Crop rotation involves changing the type of crop grown in a particular area each season 🌾➡️🌽➡️🌻. It helps maintain soil fertility and reduce pests. Want to know more ?";
     }
+    else if (userMessage.toLowerCase().includes("no-till")) {
+      reply = "No-till farming minimizes soil disturbance by leaving the previous year's crop residue on the field 🌱. It helps improve soil health and reduce erosion. Need more details?";
+    }
+     else if (userMessage.toLowerCase().includes("fertilizer")) {
+      reply = "Fertilizers provide essential nutrients to crops 🌿. There are organic and synthetic options. It's important to use them judiciously to avoid environmental harm. Want recommendations?";
+    }
+     else if (userMessage.toLowerCase().includes("irrigation")) {
+      reply = "Irrigation is crucial for crop growth 💧. Common methods include drip, sprinkler, and surface irrigation. The choice depends on the crop and local conditions. Need help choosing?";
+    }
+     else if (userMessage.toLowerCase().includes("harvest")) {
+      reply = "Harvesting at the right time ensures maximum yield and quality 🌾. It varies by crop, so it's important to monitor maturity closely. Do you need tips on harvesting a specific crop?";
+    }
+      else if (userMessage.toLowerCase().includes("how are you different from other ai ")) {
+        reply ="Krishi Sahayi stands out from other farming assistants by being Malayalam-first, designed in the farmer’s own dialect, and offering personalized AI advisory based on each farmer’s land, soil, and crop profile. Unlike generic tools, it provides proactive alerts such as weather warnings, pest outbreak notifications, and government scheme reminders. With its Kerala-specific knowledge base and scalable design, Krishi Sahayi delivers accurate, farmer-friendly guidance that supports decision-making across the entire crop cycle.";
+    }
+      else if (userMessage.toLowerCase().includes("farmers in rural kerala may not be tech savvy how will they actually use your solution")) {
+        reply = " That’s exactly why we built VisionX as voice-first in Malayalam. Farmers don’t need to type or navigate menus—just speak naturally, like they do every day. We’ve also designed it to be offline-capable, so even in areas with poor internet, they can still log activities and get reminders." ;
+    }
+      else if (userMessage.toLowerCase().includes("what is your business model")) {
+        reply = "We plan to offer a freemium model—basic features free for all farmers, with premium features like advanced analytics, personalized consulting, and market insights available via subscription. We may also explore partnerships with agri-input suppliers and local cooperatives for additional revenue streams.";
+    }
+      else if (userMessage.toLowerCase().includes("mvp")) {
+        reply = "Our MVP is a voice-first chatbot in Malayalam that provides personalized farming advice based on user-inputted farm details. It includes features like weather forecasts, pest/disease identification, and market price updates. We’re focusing on usability and relevance to Kerala farmers.";
+    }
+      else if (userMessage.toLowerCase().includes("how will this solution be financially sustainable")) {
+       reply = "Initially, it can be supported through government and NGO partnerships that focus on farmer welfare. Later, we can build premium services like crop insurance integration, marketplace linkages, or advanced analytics for larger farmers, while keeping the core assistant free for small farmers."      ;
+    }  
     else {
-      reply = "I didn’t quite get that 🤔. Could you rephrase?";
+      reply = "  I didn’t quite get that 🤔.I am still learning. Could you rephrase?";
     }
 
     return reply;
