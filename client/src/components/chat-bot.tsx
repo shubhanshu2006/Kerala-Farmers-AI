@@ -53,6 +53,12 @@ export const ChatBot = () => {
       else if (userMessage.toLowerCase().includes("disease")) {
       reply = "Crop diseases can be managed by crop rotation, resistant varieties, and proper field sanitation 🦠. Do you have a specific disease in mind?";
     }
+      else if (userMessage.toLowerCase().includes("who developed you")) {
+      reply = "I was developed by the VisionX team to assist farmers with their queries. How can I help you today?";
+    }
+      else if (userMessage.toLowerCase().includes("who is saral garg")) {
+        reply = " Mr. Saral Garg, is a renowned faculty member in the Department of Data Science at RKGIT. He is highly respected for his expertise and his engaging way of teaching Web Development and other related subjects.";
+    }
       else if (userMessage.toLowerCase().includes("what can krishi sahayi do")) {
       reply = "Krishi Sahayi is your personal farming assistant! It can provide information on crops, weather, market prices, farming tips, pest management, and more. How can I assist you today?";
     }
