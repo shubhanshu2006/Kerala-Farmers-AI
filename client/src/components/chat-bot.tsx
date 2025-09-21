@@ -93,7 +93,7 @@ export const ChatBot = () => {
      else if (userMessage.toLowerCase().includes("harvest")) {
       reply = "Harvesting at the right time ensures maximum yield and quality 🌾. It varies by crop, so it's important to monitor maturity closely. Do you need tips on harvesting a specific crop?";
     }
-      else if (userMessage.toLowerCase().includes("how are you different from other ai ")) {
+      else if (userMessage.toLowerCase().includes("how are you different from other ai")) {
         reply ="Krishi Sahayi stands out from other farming assistants by being Malayalam-first, designed in the farmer’s own dialect, and offering personalized AI advisory based on each farmer’s land, soil, and crop profile. Unlike generic tools, it provides proactive alerts such as weather warnings, pest outbreak notifications, and government scheme reminders. With its Kerala-specific knowledge base and scalable design, Krishi Sahayi delivers accurate, farmer-friendly guidance that supports decision-making across the entire crop cycle.";
     }
       else if (userMessage.toLowerCase().includes("farmers in rural kerala may not be tech savvy how will they actually use your solution")) {
