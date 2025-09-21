@@ -53,7 +53,7 @@ export const ChatBot = () => {
       else if (userMessage.toLowerCase().includes("disease")) {
       reply = "Crop diseases can be managed by crop rotation, resistant varieties, and proper field sanitation 🦠. Do you have a specific disease in mind?";
     }
-      else if (userMessage.toLowerCase().includes("What can Krishi Sahayi do")) {
+      else if (userMessage.toLowerCase().includes("what can krishi sahayi do")) {
       reply = "Krishi Sahayi is your personal farming assistant! It can provide information on crops, weather, market prices, farming tips, pest management, and more. How can I assist you today?";
     }
     else if (userMessage.toLowerCase().includes("hello")) {
