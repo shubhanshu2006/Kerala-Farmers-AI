@@ -1,141 +1,90 @@
-import { useState } from "react";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import React, { useState } from "react";
+import { MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useChat } from "@/hooks/use-chat";
-import { useLanguage } from "@/hooks/use-language";
 
-export function ChatBot() {
+
+export const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputMessage, setInputMessage] = useState("");
-  const { messages, sendMessage, isLoading } = useChat();
-  const { language, t } = useLanguage();
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      text: "Hello! I'm your farming assistant. How can I help you today?",
+      isUser: false,
+    },
+  ]);
+  const [inputText, setInputText] = useState("");
 
-  const handleSendMessage = () => {
-    if (!inputMessage.trim()) return;
-    
-    sendMessage(inputMessage, {
-      language,
-      location: "Kochi" // This could be from user preferences
-    });
-    setInputMessage("");
+  const sendMessage = () => {
+    if (!inputText.trim()) return;
+
+    const newMessage = { id: Date.now(), text: inputText, isUser: true };
+    setMessages((prev) => [...prev, newMessage]);
+    setInputText("");
+
+    setTimeout(() => {
+      const response = {
+        id: Date.now() + 1,
+        text: "I understand your question about farming. Let me help you with that...",
+        isUser: false,
+      };
+      setMessages((prev) => [...prev, response]);
+    }, 1000);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
-  return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {/* Chat Toggle Button */}
-      <Button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full shadow-lg bg-primary hover:bg-primary/90"
-        data-testid="chat-toggle"
+  if (!isOpen) {
+    return (
+      <button
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-20 right-4 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all duration-200 hover:scale-105 z-50"
       >
         <MessageCircle className="h-6 w-6" />
-      </Button>
+      </button>
+    );
+  }
 
-      {/* Chat Window */}
-      {isOpen && (
-        <Card className="absolute bottom-16 right-0 w-80 shadow-xl border overflow-hidden" data-testid="chat-window">
-          {/* Chat Header */}
-          <div className="bg-primary text-primary-foreground px-4 py-3 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Bot className="h-5 w-5" />
-              <span className="font-medium">{t("chatAssistant")}</span>
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(false)}
-              className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              data-testid="close-chat"
+  return (
+    <div className="fixed bottom-20 right-4 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 z-50">
+      <div className="bg-green-600 text-white p-4 rounded-t-xl flex items-center justify-between">
+        <h3 className="font-semibold">AI Assistant</h3>
+        <button onClick={() => setIsOpen(false)}>
+          <X className="h-5 w-5" />
+        </button>
+      </div>
+
+      <div className="h-64 overflow-y-auto p-4 space-y-3">
+        {messages.map((message) => (
+          <div
+            key={message.id}
+            className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
+          >
+            <div
+              className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
+                message.isUser
+                  ? "bg-green-600 text-white"
+                  : "bg-gray-100 text-gray-800"
+              }`}
             >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-
-          {/* Chat Messages */}
-          <ScrollArea className="h-64 p-4" data-testid="chat-messages">
-            <div className="space-y-3">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex items-start space-x-2 ${
-                    message.isUser ? "justify-end" : ""
-                  }`}
-                >
-                  {!message.isUser && (
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                      <Bot className="h-4 w-4 text-primary-foreground" />
-                    </div>
-                  )}
-                  
-                  <div
-                    className={`rounded-lg p-3 max-w-56 ${
-                      message.isUser
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted"
-                    }`}
-                    data-testid={`message-${message.isUser ? "user" : "bot"}`}
-                  >
-                    <p className="text-sm">{message.message}</p>
-                  </div>
-
-                  {message.isUser && (
-                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
-                      <User className="h-4 w-4 text-secondary-foreground" />
-                    </div>
-                  )}
-                </div>
-              ))}
-              
-              {isLoading && (
-                <div className="flex items-start space-x-2">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                    <Bot className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                  <div className="bg-muted rounded-lg p-3">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                      <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </ScrollArea>
-
-          {/* Chat Input */}
-          <div className="border-t border-border p-4">
-            <div className="flex space-x-2">
-              <Input
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder={t("typeYourQuestion")}
-                className="flex-1"
-                disabled={isLoading}
-                data-testid="chat-input"
-              />
-              <Button
-                onClick={handleSendMessage}
-                disabled={!inputMessage.trim() || isLoading}
-                data-testid="send-message"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
+              {message.text}
             </div>
           </div>
-        </Card>
-      )}
+        ))}
+      </div>
+
+      <div className="p-4 border-t border-gray-200">
+        <div className="flex space-x-2">
+          <input
+            type="text"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="Type your question..."
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+          />
+          <Button onClick={sendMessage} size="sm">
+            Send
+          </Button>
+        </div>
+      </div>
     </div>
   );
-}
+};
